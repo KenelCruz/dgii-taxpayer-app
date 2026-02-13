@@ -1,0 +1,43 @@
+<div class="receipts-container">
+  <h3>
+    <mat-icon>receipt_long</mat-icon>
+    Comprobantes Fiscales
+  </h3>
+
+  <!-- DEBUG: Mostrar siempre para verificar -->
+  <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 4px;">
+    <strong>DEBUG:</strong> Cantidad de comprobantes = {{ receipts?.length || 0 }}
+  </div>
+
+  <!-- Tabla Simple (sin mat-table) -->
+  <div *ngIf="hasReceipts" class="table-wrapper">
+    <table class="receipts-table">
+      <thead>
+        <tr>
+          <th>NCF</th>
+          <th>Monto</th>
+          <th>ITBIS (18%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let receipt of receipts">
+          <td>
+            <code>{{ receipt.NCF }}</code>
+          </td>
+          <td class="amount-cell">
+            {{ receipt.Amount | currency: 'DOP' : 'symbol-narrow' : '1.2-2' }}
+          </td>
+          <td class="itbis-cell">
+            <strong>{{ receipt.Itbis | currency: 'DOP' : 'symbol-narrow' : '1.2-2' }}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mensaje cuando no hay datos -->
+  <div *ngIf="!hasReceipts" class="no-data">
+    <mat-icon>info</mat-icon>
+    <p>No hay comprobantes disponibles para este contribuyente</p>
+  </div>
+</div>

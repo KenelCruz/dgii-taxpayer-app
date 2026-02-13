@@ -1,0 +1,501 @@
+
+$primary:         #1a56db;
+$primary-dark:    #1040b0;
+$primary-light:   #dbeafe;
+$surface:         #ffffff;
+$surface-alt:     #f8faff;
+$border:          #e2e8f0;
+$border-focus:    #1a56db;
+$text-primary:    #0f172a;
+$text-secondary:  #475569;
+$text-muted:      #94a3b8;
+$error:           #dc2626;
+$error-bg:        #fef2f2;
+$error-border:    #fca5a5;
+$success:         #16a34a;
+$radius-sm:       6px;
+$radius-md:       10px;
+$radius-lg:       14px;
+$shadow-sm:       0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+$shadow-md:       0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+$shadow-lg:       0 10px 30px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+$transition:      all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 520px;
+  max-width: 620px;
+  background: $surface;
+  animation: dialogEnter 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+// ============================================================
+// Header
+// ============================================================
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px;
+
+  margin-bottom: -1px;
+  background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  
+  &::after {
+    content: '';
+    position: absolute;
+    right: -30px;
+    top: -30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    pointer-events: none;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 60px;
+    bottom: -40px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+
+    .header-icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: $radius-md;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      mat-icon {
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+      }
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      h2 {
+        margin: 0;
+        font-size: 1.15rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+      }
+
+      .header-subtitle {
+        font-size: 0.78rem;
+        opacity: 0.75;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+      }
+    }
+  }
+
+  .close-button {
+    color: rgba(255, 255, 255, 0.85);
+    position: relative;
+    z-index: 1;
+    transition: $transition;
+    border-radius: $radius-sm;
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.15);
+    }
+  }
+}
+
+// ============================================================
+// Content
+// ============================================================
+.dialog-content {
+  padding: 18px 28px 16px;
+  max-height: 72vh;
+  overflow-y: auto;
+
+  // Custom scrollbar
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: $border;
+    border-radius: 4px;
+  }
+}
+
+// ============================================================
+// Taxpayer Info Card
+// ============================================================
+.taxpayer-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: $surface-alt;
+  border: 1px solid $border;
+  border-left: 3px solid $primary;
+  border-radius: $radius-md;
+  margin-bottom: 22px;
+
+  .taxpayer-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: $primary-light;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+      color: $primary;
+    }
+  }
+
+  .taxpayer-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+
+    .taxpayer-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: $text-primary;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .taxpayer-rnc {
+      font-size: 0.8rem;
+      color: $text-secondary;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.02em;
+    }
+  }
+}
+
+// ============================================================
+// Divider
+// ============================================================
+mat-divider {
+  margin: 20px 0 !important;
+  border-color: $border !important;
+}
+
+// ============================================================
+// Form
+// ============================================================
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+
+  .full-width {
+    width: 100%;
+  }
+
+  // Section label for grouping fields
+  .form-section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: $text-muted;
+    margin: 10px 0 6px;
+  }
+
+  // Row layout for side-by-side fields
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  // Override Angular Material field internals
+  mat-form-field {
+    &.mat-form-field-disabled {
+      ::ng-deep {
+        .mdc-text-field--disabled {
+          background: #f1f5f9;
+        }
+        .mdc-text-field__input {
+          color: $text-secondary !important;
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .calculate-button {
+      color: $primary;
+      border-radius: $radius-sm;
+      transition: $transition;
+
+      mat-icon {
+        font-size: 18px;
+        width: 18px;
+        height: 18px;
+        transition: transform 0.35s ease;
+      }
+
+      &:hover {
+        background: $primary-light;
+
+        mat-icon {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+
+  // General error message
+  .form-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 14px;
+    background: $error-bg;
+    border: 1px solid $error-border;
+    border-left: 3px solid $error;
+    border-radius: $radius-md;
+    color: $error;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    animation: shakeIn 0.4s ease;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+  }
+}
+
+// ============================================================
+// Dialog Actions Footer
+// ============================================================
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px 20px;
+  margin: 0 -24px -24px;
+  background: $surface-alt;
+  border-top: 1px solid $border;
+
+  button {
+    height: 40px;
+    min-width: 130px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    border-radius: $radius-md !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: $transition;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+
+    .button-spinner {
+      ::ng-deep circle {
+        stroke: white;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+  }
+
+  button[mat-stroked-button] {
+    border-color: $border;
+    color: $text-secondary;
+    background: $surface;
+    box-shadow: $shadow-sm;
+
+    &:hover:not(:disabled) {
+      border-color: #cbd5e1;
+      background: #f1f5f9;
+      color: $text-primary;
+    }
+  }
+
+  button[mat-raised-button] {
+    background: $primary;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(26, 86, 219, 0.35);
+
+    &:hover:not(:disabled) {
+      background: $primary-dark;
+      box-shadow: 0 4px 12px rgba(26, 86, 219, 0.45);
+      transform: translateY(-1px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 1px 4px rgba(26, 86, 219, 0.3);
+    }
+  }
+}
+
+// ============================================================
+// Animations
+// ============================================================
+@keyframes dialogEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes shakeIn {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-5px); }
+  40%       { transform: translateX(5px); }
+  60%       { transform: translateX(-3px); }
+  80%       { transform: translateX(3px); }
+}
+
+// ============================================================
+// Global Material Overrides (scoped to this component)
+// ============================================================
+::ng-deep {
+  .mat-mdc-dialog-container {
+    border-radius: $radius-lg !important;
+    box-shadow: $shadow-lg !important;
+    overflow: hidden;
+  }
+
+  // Collapse the extra space mat-dialog-title creates below itself
+  .mat-mdc-dialog-title {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+
+    &::before {
+      display: none !important;
+    }
+  }
+
+  // Fix text prefix (RD$) spacing so it doesn't overlap the floating label
+  .mat-mdc-form-field {
+    .mat-mdc-form-field-text-prefix {
+      padding-right: 4px;
+      color: $text-secondary;
+      font-size: 0.9rem;
+    }
+
+    // Ensure input doesn't crowd the prefix
+    .mdc-text-field--outlined .mdc-text-field__input {
+      padding-left: 0;
+    }
+  }
+
+  .mat-mdc-form-field-error {
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .mat-mdc-form-field-hint {
+    font-size: 0.78rem;
+    color: $text-muted;
+  }
+
+  .mat-mdc-form-field-icon-prefix,
+  .mat-mdc-form-field-icon-suffix {
+    color: $text-muted;
+  }
+}
+
+// ============================================================
+// Responsive — Mobile
+// ============================================================
+@media (max-width: 599px) {
+  .dialog-container {
+    min-width: unset;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .dialog-header {
+    padding: 18px 20px;
+
+    .header-content {
+      .header-icon-wrapper {
+        width: 36px;
+        height: 36px;
+      }
+
+      .header-text h2 {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .dialog-content {
+    padding: 18px 20px 12px;
+  }
+
+  form .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dialog-actions {
+    padding: 14px 20px 16px;
+    flex-direction: column-reverse;
+    gap: 8px;
+
+    button {
+      width: 100%;
+      min-width: unset;
+    }
+  }
+}

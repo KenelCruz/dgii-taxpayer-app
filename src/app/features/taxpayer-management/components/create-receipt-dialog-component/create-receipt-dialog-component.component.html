@@ -1,0 +1,133 @@
+<div class="dialog-container">
+
+  
+  <div mat-dialog-title class="dialog-header">
+    <div class="header-content">
+      <div class="header-icon-wrapper">
+        <mat-icon>receipt_long</mat-icon>
+      </div>
+      <div class="header-text">
+        <h2>Nuevo Comprobante Fiscal</h2>
+        <span class="header-subtitle">Complete los datos del comprobante</span>
+      </div>
+    </div>
+    <button mat-icon-button (click)="onCancel()" class="close-button" aria-label="Cerrar">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+
+  <mat-dialog-content class="dialog-content">
+
+
+    <div class="taxpayer-info">
+      <div class="taxpayer-avatar">
+        <mat-icon>account_circle</mat-icon>
+      </div>
+      <div class="taxpayer-details">
+        <span class="taxpayer-name">{{ data.taxpayerName }}</span>
+        <span class="taxpayer-rnc">RNC/Cédula: {{ data.rncCedula }}</span>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+
+    <form [formGroup]="receiptForm" (ngSubmit)="onSubmit()">
+
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>RNC/Cédula del Contribuyente</mat-label>
+        <input matInput formControlName="rncCedula" readonly>
+        <mat-icon matPrefix>badge</mat-icon>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Número de Comprobante Fiscal (NCF)</mat-label>
+        <input
+          matInput
+          formControlName="NCF"
+          placeholder="Ej: B0100000001"
+          maxlength="19"
+          (input)="$any($event.target).value = $any($event.target).value.toUpperCase()">
+        <mat-icon matPrefix>confirmation_number</mat-icon>
+        <mat-hint>Letra seguida de números · 11–19 caracteres</mat-hint>
+        <mat-error *ngIf="hasError('NCF')">{{ getErrorMessage('NCF') }}</mat-error>
+      </mat-form-field>
+
+
+      <div class="form-row">
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>Monto Total</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="Amount"
+            placeholder="0.00"
+            step="0.01"
+            min="0"
+            (blur)="calculateItbis()">
+          <span matPrefix>RD$&nbsp;</span>
+          <mat-error *ngIf="hasError('Amount')">{{ getErrorMessage('Amount') }}</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>ITBIS (18%)</mat-label>
+          <input
+            matInput
+            type="number"
+            formControlName="Itbis"
+            placeholder="0.00"
+            step="0.01"
+            min="0">
+          <span matPrefix>RD$&nbsp;</span>
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="calculateItbis()"
+            matTooltip="Calcular 18% automáticamente"
+            class="calculate-button">
+            <mat-icon>refresh</mat-icon>
+          </button>
+          <mat-error *ngIf="hasError('Itbis')">{{ getErrorMessage('Itbis') }}</mat-error>
+        </mat-form-field>
+
+      </div>
+
+
+      <mat-error *ngIf="error" class="form-error">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ error }}</span>
+      </mat-error>
+
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button
+      mat-stroked-button
+      type="button"
+      (click)="onCancel()"
+      [disabled]="loading">
+      <mat-icon>close</mat-icon>
+      Cancelar
+    </button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="onSubmit()"
+      [disabled]="loading || receiptForm.invalid">
+      <mat-spinner *ngIf="loading" diameter="18" class="button-spinner"></mat-spinner>
+      <mat-icon *ngIf="!loading">check</mat-icon>
+      {{ loading ? 'Guardando...' : 'Crear Comprobante' }}
+    </button>
+  </mat-dialog-actions>
+
+</div>

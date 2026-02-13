@@ -1,0 +1,73 @@
+<mat-card *ngIf="taxpayerReport" class="detail-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="title-container">
+        <div>
+          <div class="header-icon">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          <div class="header-label">
+            <span class="title-text">Detalle del Contribuyente</span>
+            <span class="title-sub">Información y comprobantes fiscales</span>
+          </div>
+        </div>
+        <button mat-icon-button (click)="onClose()" aria-label="Cerrar">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+   
+    <div class="taxpayer-info">
+      <div class="info-row">
+        <span class="label">RNC / Cédula</span>
+        <span class="value">{{ taxpayerReport.rncCedula }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Nombre</span>
+        <span class="value name-value">{{ taxpayerReport.Name }}</span>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+
+    <div class="receipts-header">
+      <div class="receipts-title">
+        <mat-icon>receipt_long</mat-icon>
+        <h3>Comprobantes Fiscales</h3>
+        <span class="badge">{{ taxpayerReport.vouchers.length }}</span>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onCreateReceipt()"
+        class="create-button">
+        <mat-icon>add</mat-icon>
+        Nuevo Comprobante
+      </button>
+    </div>
+
+
+    <app-receipt-table [receipts]="taxpayerReport.vouchers"></app-receipt-table>
+
+    <mat-divider></mat-divider>
+
+
+    <div class="total-section">
+      <div class="total-card">
+        <div class="total-icon">
+          <mat-icon>payments</mat-icon>
+        </div>
+        <div class="total-content">
+          <span class="total-label">Total ITBIS</span>
+          <span class="total-amount">{{ taxpayerReport.TotalItbis | currency: 'DOP' : 'symbol-narrow' : '1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,42 @@
+<div class="dashboard-container">
+
+  <!-- Header Moderno -->
+  <div class="dashboard-header">
+    <div class="header-content">
+      <mat-icon>account_balance</mat-icon>
+      <h1>Sistema de Gestión de Contribuyentes - DGII</h1>
+    </div>
+  </div>
+
+  <!-- Loading Principal -->
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+  <!-- Error Principal -->
+  <app-error-message
+    *ngIf="error && !loading"
+    [message]="error">
+  </app-error-message>
+
+  <!-- Lista de Contribuyentes -->
+  <div *ngIf="!loading && !error" class="content-section fade-in">
+    <app-taxpayer-list
+      [taxpayers]="taxpayers"
+      (taxpayerSelected)="onTaxpayerSelected($event)">
+    </app-taxpayer-list>
+  </div>
+
+  <!-- Loading del Detalle -->
+  <div *ngIf="loadingDetail" class="detail-loading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+  <!-- Detalle del Contribuyente -->
+  <div *ngIf="selectedTaxpayerReport && !loadingDetail" class="detail-section slide-in-right">
+    <app-taxpayer-detail
+      [taxpayerReport]="selectedTaxpayerReport"
+      (closeDetail)="onCloseDetail()"
+      (createReceipt)="openCreateReceiptDialog()">
+    </app-taxpayer-detail>
+  </div>
+
+</div>

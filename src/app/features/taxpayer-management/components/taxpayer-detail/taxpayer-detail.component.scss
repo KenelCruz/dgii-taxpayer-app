@@ -1,0 +1,385 @@
+
+$primary:         #1a56db;
+$primary-dark:    #1040b0;
+$primary-light:   #dbeafe;
+$surface:         #ffffff;
+$surface-alt:     #f8faff;
+$border:          #e2e8f0;
+$text-primary:    #0f172a;
+$text-secondary:  #475569;
+$text-muted:      #94a3b8;
+$error:           #dc2626;
+$radius-sm:       6px;
+$radius-md:       10px;
+$radius-lg:       14px;
+$shadow-sm:       0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+$shadow-md:       0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.05);
+$shadow-card:     0 1px 3px rgba(0, 0, 0, 0.06), 0 6px 24px rgba(0, 0, 0, 0.07);
+$transition:      all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+
+.detail-card {
+  margin: 20px;
+  border-radius: $radius-lg !important;
+  box-shadow: $shadow-card !important;
+  border: 1px solid $border;
+  overflow: hidden;
+  animation: slideInRight 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+
+  mat-card-header {
+    padding: 0 !important;
+    margin: 0;
+
+    mat-card-title {
+      margin: 0;
+
+      .title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 24px;
+        background: linear-gradient(135deg, $primary 0%, $primary-dark 100%);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+
+
+        &::after {
+          content: '';
+          position: absolute;
+          right: -20px;
+          top: -25px;
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.07);
+          pointer-events: none;
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          right: 55px;
+          bottom: -35px;
+          width: 75px;
+          height: 75px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.04);
+          pointer-events: none;
+        }
+
+        > div:first-child {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          position: relative;
+          z-index: 1;
+
+          .header-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: $radius-md;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            flex-shrink: 0;
+
+            mat-icon {
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
+            }
+          }
+
+          .header-label {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+
+            .title-text {
+              font-size: 1.05rem;
+              font-weight: 600;
+              letter-spacing: -0.01em;
+              line-height: 1.2;
+            }
+
+            .title-sub {
+              font-size: 0.75rem;
+              opacity: 0.7;
+              font-weight: 400;
+            }
+          }
+        }
+
+        button {
+          color: rgba(255, 255, 255, 0.8);
+          position: relative;
+          z-index: 1;
+          border-radius: $radius-sm;
+          transition: $transition;
+
+          mat-icon {
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+          }
+
+          &:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.15);
+          }
+        }
+      }
+    }
+  }
+
+
+  mat-card-content {
+    padding: 24px !important;
+
+
+    .taxpayer-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px;
+      background: $surface-alt;
+      border: 1px solid $border;
+      border-radius: $radius-md;
+      margin-bottom: 22px;
+
+      .info-row {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        .label {
+          font-size: 0.7rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.07em;
+          color: $text-muted;
+        }
+
+        .value {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: $text-primary;
+          font-family: 'Courier New', monospace;
+          letter-spacing: 0.02em;
+
+          &.name-value {
+            font-family: inherit;
+            font-size: 0.95rem;
+            letter-spacing: 0;
+          }
+        }
+      }
+    }
+
+
+    mat-divider {
+      margin: 22px 0 !important;
+      border-color: $border !important;
+    }
+
+    
+    .receipts-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      gap: 16px;
+
+      .receipts-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex: 1;
+
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+          color: $primary;
+        }
+
+        h3 {
+          margin: 0;
+          font-size: 1rem;
+          font-weight: 600;
+          color: $text-primary;
+          letter-spacing: -0.01em;
+        }
+
+        .badge {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 24px;
+          height: 20px;
+          padding: 0 7px;
+          background: $primary-light;
+          color: $primary;
+          border-radius: 10px;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0;
+        }
+      }
+
+      .create-button {
+        height: 38px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        border-radius: $radius-md !important;
+        gap: 4px;
+        box-shadow: 0 2px 6px rgba(26, 86, 219, 0.3);
+        transition: $transition;
+        padding: 0 16px !important;
+
+        mat-icon {
+          font-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+
+        &:hover {
+          box-shadow: 0 4px 12px rgba(26, 86, 219, 0.4);
+          transform: translateY(-1px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+
+
+    .total-section {
+      margin-top: 20px;
+
+      .total-card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 20px;
+        background: linear-gradient(135deg, $primary-light 0%, #bfdbfe 100%);
+        border-radius: $radius-md;
+        border: 1px solid #bfdbfe;
+
+        .total-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          background: $primary;
+          border-radius: $radius-md;
+          flex-shrink: 0;
+          box-shadow: 0 3px 8px rgba(26, 86, 219, 0.35);
+
+          mat-icon {
+            font-size: 24px;
+            width: 24px;
+            height: 24px;
+            color: #fff;
+          }
+        }
+
+        .total-content {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          flex: 1;
+
+          .total-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: $text-secondary;
+          }
+
+          .total-amount {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: $primary-dark;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .detail-card {
+    margin: 12px;
+
+    mat-card-content {
+      padding: 18px !important;
+
+      .taxpayer-info {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 14px;
+      }
+
+      .receipts-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+
+        .create-button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      .total-section .total-card {
+        padding: 14px 16px;
+
+        .total-icon {
+          width: 40px;
+          height: 40px;
+          mat-icon { font-size: 20px; }
+        }
+
+        .total-content .total-amount {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-card {
+    margin: 8px;
+
+    mat-card-header mat-card-title .title-container {
+      padding: 16px 18px;
+    }
+
+    mat-card-content {
+      padding: 14px !important;
+    }
+  }
+}
